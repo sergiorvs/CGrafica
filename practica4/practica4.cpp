@@ -83,6 +83,8 @@ GLint grass;
 GLint roof;
 GLint trunk;
 GLint leaf;
+GLint door;
+GLint window;
 
 //Objetos
 GLUquadricObj *sphere = NULL;
@@ -201,6 +203,8 @@ int main(int argc, char **argv)
 	roof = TextureManager::Inst()->LoadTexture("roofs.jpg", GL_RGB, GL_RGB);
 	trunk = TextureManager::Inst()->LoadTexture("tronco.jpg", GL_RGB, GL_RGB);
 	leaf = TextureManager::Inst()->LoadTexture("leafs.jpeg", GL_RGB, GL_RGBA);
+	door = TextureManager::Inst()->LoadTexture("door.jpg", GL_RGB, GL_RGB);
+	window = TextureManager::Inst()->LoadTexture("window.jpeg", GL_RGB, GL_RGB);
 	
 	glutDisplayFunc(&window_display);
 	glutReshapeFunc(&window_reshape);
@@ -360,6 +364,40 @@ GLvoid FrontWall(){
 	glVertex3f(0.0f, 5.0f, 4.0f);
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
+
+	//door
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, door);
+	glNormal3f(nFrontWall.x, nFrontWall.y, nFrontWall.z);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(3.5f, 0.0f, 4.0f);
+	glTexCoord2f(1.0, 0.0f);
+	glVertex3f(5.0f, 0.0f, 4.0f);
+	glTexCoord2f(1.0, 1.0f);
+	glVertex3f(5.0f, 3.0f, 4.0f);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(3.5f, 3.0f, 4.0f);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+
+	//window
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D, window);
+	glNormal3f(nFrontWall.x, nFrontWall.y, nFrontWall.z);
+	glBegin(GL_QUADS);
+	glTexCoord2f(0.0, 0.0);
+	glVertex3f(1.5f, 2.5f, 4.0f);
+	glTexCoord2f(1.0, 0.0f);
+	glVertex3f(2.5f, 2.5f, 4.0f);
+	glTexCoord2f(1.0, 1.0f);
+	glVertex3f(2.5f, 4.0f, 4.0f);
+	glTexCoord2f(0.0, 1.0);
+	glVertex3f(1.5f, 4.0f, 4.0f);
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+
+
 }
 
 GLvoid LeftWall(){
